@@ -21,7 +21,7 @@ const ADD_BOOK = gql`
 `;
 
 const DELETE_BOOK = gql`
-  mutation($id: Int) {
+  mutation ($id: Int) {
     deleteBook(id: $id) {
       id
       name
@@ -30,20 +30,43 @@ const DELETE_BOOK = gql`
   }
 `;
 
+const newBook = {
+  id: 3,
+  name: 'Never ending story',
+  author: 'Joe Burton',
+};
+
 const BookInfo = () => {
   const { loading, error, data } = useQuery(GET_BOOKS);
 
   const [addTodo] = useMutation(ADD_BOOK);
-  const [deleteBook] = useMutation(DELETE_BOOK);
+
+  const updateCache = (cache) => {
+    let { books } = cache.readQuery({ query: GET_BOOKS });
+    const newBooks = books.filter((book) => book.id !== 3);
+
+    cache.writeQuery({
+      query: GET_BOOKS,
+      data: {
+        books: newBooks,
+      },
+    });
+  };
+
+  const [deleteBook] = useMutation(DELETE_BOOK, { update: updateCache });
+
+  const deleteBookFromDatabase = () => {
+    deleteBook({
+      variables: {
+        id: 3,
+        name: 'Never ending story',
+        author: 'Joe Burton',
+      },
+    });
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-
-  const newBook = {
-    id: 3,
-    name: 'Never ending story',
-    author: 'Joe Burton',
-  };
 
   return (
     <div>
@@ -66,25 +89,7 @@ const BookInfo = () => {
       >
         Add Book
       </button>
-      <button
-        onClick={() =>
-          deleteBook({
-            variables: newBook,
-            update: (cache) => {
-              let { books } = cache.readQuery({ query: GET_BOOKS });
-              const newBooks = books.filter((book) => book.id !== 3);
-              cache.writeQuery({
-                query: GET_BOOKS,
-                data: {
-                  books: newBooks,
-                },
-              });
-            },
-          })
-        }
-      >
-        Delete Book 3
-      </button>
+      <button onClick={deleteBookFromDatabase}>Delete Book 3</button>
     </div>
   );
 };
