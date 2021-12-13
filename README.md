@@ -1,6 +1,6 @@
 # NextJS Apollo App
 
-This is a first stap at setting up NextJS, GraphQL and Apollo together, it's not a work of art.
+This is a first stab at setting up GraphQL and Apollo with NextJS pages and pages/api, it's not a work of art.
 
 This project uses Apollo, GraphQL with NextJS.
 
