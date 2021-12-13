@@ -72,7 +72,6 @@ const DevelopersData = () => {
 
   return (
     <div>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
       <button
         onClick={() =>
           addTodo({
@@ -92,6 +91,7 @@ const DevelopersData = () => {
         Add Developer
       </button>
       <button onClick={deleteDeveloperFromDatabase}>Delete Developer 3</button>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 };
