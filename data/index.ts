@@ -1,14 +1,14 @@
-let books = [
+let developers = [
   {
     id: 1,
-    name: 'In the End',
-    author: 'Just Smith',
+    name: 'Joe Burton',
+    skills: 'React, CSS, HTML',
   },
   {
     id: 2,
-    name: 'Something Different',
-    author: 'Ben Brown',
+    name: 'Jill Hill',
+    skills: 'C#, SQL',
   },
 ];
 
-export default books;
+export default developers;

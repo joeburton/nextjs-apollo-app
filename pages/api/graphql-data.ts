@@ -1,60 +1,62 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
 
-let books = [
+let developers = [
   {
     id: 1,
-    name: 'In the End',
-    author: 'Just Smith',
+    name: 'Joe Burton',
+    skills: 'React, CSS, HTML',
   },
   {
     id: 2,
-    name: 'Something Different',
-    author: 'Ben Brown',
+    name: 'Jill Hill',
+    skills: 'C#, SQL',
   },
 ];
 
 const typeDefs = gql`
-  type Book {
+  type Developer {
     id: Int
     name: String
-    author: String
+    skills: String
   }
 
   type Query {
-    books: [Book]
+    developers: [Developer]
   }
 
   type Mutation {
-    editBook(id: Int, name: String, author: String): [Book]
-    addBook(id: Int, name: String, author: String): [Book]
-    deleteBook(id: Int): [Book]
+    editDeveloper(id: Int, name: String, skills: String): [Developer]
+    addDeveloper(id: Int, name: String, skills: String): [Developer]
+    deleteDeveloper(id: Int): [Developer]
   }
 `;
 
 const resolvers = {
   Query: {
-    books: () => books,
+    developers: () => developers,
   },
 
   Mutation: {
-    addBook: (_root, args) => {
-      books = [...books, args];
-      console.log(books);
-      return books;
+    addDeveloper: (_root, args) => {
+      developers = [...developers, args];
+      console.log(developers);
+      return developers;
     },
-    deleteBook: (_root, args) => {
-      const updatedBooks = books.filter((book) => book.id !== args.id);
-      books = updatedBooks;
-      console.log(books);
-      return books;
+    deleteDeveloper: (_root, args) => {
+      const updatedDevelopers = developers.filter(
+        (book) => book.id !== args.id
+      );
+      developers = updatedDevelopers;
+      console.log(developers);
+      return developers;
     },
-    editBook: (_root, args) => {
-      const updatedBooks = books.map((book) =>
+    editDeveloper: (_root, args) => {
+      const updatedDevelopers = developers.map((book) =>
         book.id === args.id ? args : book
       );
-      books = updatedBooks;
-      console.log(books);
-      return books;
+      developers = updatedDevelopers;
+      console.log(developers);
+      return developers;
     },
   },
 };

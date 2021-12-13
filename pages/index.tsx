@@ -1,6 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
-import { Books } from '../components';
+import { Developers, DevelopersInfo } from '../components';
 
 const Home = () => {
   const cache = new InMemoryCache({
@@ -8,7 +8,7 @@ const Home = () => {
     typePolicies: {
       Query: {
         fields: {
-          books: {
+          developers: {
             merge(_existing, incoming) {
               return incoming;
             },
@@ -26,7 +26,8 @@ const Home = () => {
     <ApolloProvider client={client}>
       <div>
         <h1>NextJS GraphQL Apollo App</h1>
-        <Books />
+        <Developers />
+        <DevelopersInfo />
       </div>
     </ApolloProvider>
   );

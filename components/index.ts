@@ -1,3 +1,2 @@
-export { Books } from './Books';
-export { AuthorInfo } from './AuthorInfo';
-export { BookInfo } from './BookInfo';
+export { Developers } from './Developers';
+export { DevelopersInfo } from './DevelopersInfo';
