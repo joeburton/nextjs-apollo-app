@@ -11,7 +11,7 @@ const GET_DEVELOPERS = gql`
 `;
 
 const ADD_DEVELOPER = gql`
-  mutation addDeveloper($id: Int, $name: String, $skills: String) {
+  mutation addDeveloper($id: String, $name: String, $skills: String) {
     addDeveloper(id: $id, name: $name, skills: $skills) {
       id
       name
@@ -21,7 +21,7 @@ const ADD_DEVELOPER = gql`
 `;
 
 const DELETE_DEVELOPER = gql`
-  mutation ($id: Int) {
+  mutation ($id: String) {
     deleteDeveloper(id: $id) {
       id
       name
@@ -31,7 +31,7 @@ const DELETE_DEVELOPER = gql`
 `;
 
 const newDeveloper = {
-  id: 3,
+  id: 'something-random',
   name: 'Mike Brains',
   skills: 'PHP, CSS',
 };
@@ -43,7 +43,9 @@ const DevelopersData = () => {
 
   const updateCache = (cache) => {
     let { developers } = cache.readQuery({ query: GET_DEVELOPERS });
-    const newDevelopers = developers.filter((developer) => developer.id !== 3);
+    const newDevelopers = developers.filter(
+      (developer) => developer.id !== 'something-random'
+    );
 
     cache.writeQuery({
       query: GET_DEVELOPERS,
@@ -60,7 +62,7 @@ const DevelopersData = () => {
   const deleteDeveloperFromDatabase = () => {
     deleteDeveloper({
       variables: {
-        id: 3,
+        id: 'something-random',
         name: 'Joe Burton',
         skills: 'React, HTML, CSS',
       },
@@ -76,8 +78,9 @@ const DevelopersData = () => {
         onClick={() =>
           addTodo({
             variables: newDeveloper,
-            update: (cache) => {
+            update: (cache, mutationResult) => {
               let { developers } = cache.readQuery({ query: GET_DEVELOPERS });
+              console.log(mutationResult);
               cache.writeQuery({
                 query: GET_DEVELOPERS,
                 data: {

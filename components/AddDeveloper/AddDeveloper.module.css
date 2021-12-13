@@ -1,0 +1,9 @@
+.addDeveloper {
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 8px 0;
+}
+
+.addDeveloper input {
+  margin-right: 8px;
+}

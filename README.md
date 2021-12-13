@@ -8,8 +8,10 @@ This is a first stab at setting up GraphQL and Apollo with NextJS pages and page
 
 ### **_GraphQL Queries_**
 
+### https://studio.apollographql.com/sandbox/explorer
+
 ```
-{
+query Query {
   developers {
     id
     name
@@ -19,7 +21,7 @@ This is a first stab at setting up GraphQL and Apollo with NextJS pages and page
 ```
 
 ```
-mutation addDeveloper($id: Int, $name: String, $skills: String) {
+mutation AddDeveloper($id: String, $name: String, $skills: String) {
   addDeveloper(id: $id, name: $name, skills: $skills) {
     id
     name
@@ -28,11 +30,11 @@ mutation addDeveloper($id: Int, $name: String, $skills: String) {
 }
 
 // variables
-{ "id": 3, "name": "James Brown", "skills": "Jazz"}
+{ "id": '234234-234234', "name": "James Brown", "skills": "Jazz"}
 ```
 
 ```
-mutation editDeveloper($id: Int, $name: String, $skills: String) {
+mutation EditDeveloper($id: String, $name: String, $skills: String) {
   editDeveloper(id: $id, name: $name, skills: $skills) {
     id
     name
@@ -41,11 +43,11 @@ mutation editDeveloper($id: Int, $name: String, $skills: String) {
 }
 
 // variables
-{ "id": 3, "name": "James Brown", "skills": "Jazz"}
+{ "id": '234234-234234', "name": "James Brown", "skills": "Jazz"}
 ```
 
 ```
-mutation($id: Int) {
+mutation DeleteDeveloper($id: String) {
   deleteDeveloper(id: $id) {
     id
     name

@@ -1,13 +1,16 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
+import Cors from 'micro-cors';
+
+const cors = Cors();
 
 let developers = [
   {
-    id: 1,
+    id: 'fd66e955-10e9-4762-8847-14fbdc80e38a',
     name: 'Joe Burton',
     skills: 'React, CSS, HTML',
   },
   {
-    id: 2,
+    id: 'fd66e955-10e9-4762-8847-14fbdc80e38b',
     name: 'Jill Hill',
     skills: 'C#, SQL',
   },
@@ -15,7 +18,7 @@ let developers = [
 
 const typeDefs = gql`
   type Developer {
-    id: Int
+    id: String
     name: String
     skills: String
   }
@@ -25,9 +28,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    editDeveloper(id: Int, name: String, skills: String): [Developer]
-    addDeveloper(id: Int, name: String, skills: String): [Developer]
-    deleteDeveloper(id: Int): [Developer]
+    editDeveloper(id: String, name: String, skills: String): [Developer]
+    addDeveloper(id: String, name: String, skills: String): [Developer]
+    deleteDeveloper(id: String): [Developer]
   }
 `;
 
@@ -63,12 +66,22 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-const handler = server.createHandler({ path: '/api/graphql-data' });
+const startServer = server.start();
+
+export default cors(async function handler(req, res) {
+  if (req.method === 'OPTIONS') {
+    res.end();
+    return false;
+  }
+  await startServer;
+
+  await server.createHandler({
+    path: '/api/graphql-data',
+  })(req, res);
+});
 
 export const config = {
   api: {
     bodyParser: false,
   },
 };
-
-export default handler;
