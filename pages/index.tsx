@@ -1,6 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
-import { BookInfo, AuthorInfo } from '../components';
+import { BookInfo } from '../components';
 
 const Home = () => {
   const cache = new InMemoryCache({
@@ -27,7 +27,7 @@ const Home = () => {
       <div>
         <h1>NextJS GraphQL Apollo App</h1>
         <BookInfo />
-        <AuthorInfo />
+        {/* <AuthorInfo /> */}
       </div>
     </ApolloProvider>
   );

@@ -25,6 +25,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    editBook(id: Int, name: String, author: String): [Book]
     addBook(id: Int, name: String, author: String): [Book]
     deleteBook(id: Int): [Book]
   }
@@ -38,13 +39,21 @@ const resolvers = {
   Mutation: {
     addBook: (_root, args) => {
       books = [...books, args];
-      console.log(args);
+      console.log(books);
       return books;
     },
     deleteBook: (_root, args) => {
-      const newBooks = books.filter((book) => book.id !== args.id);
-      books = newBooks;
-      console.log('delete books: ', books);
+      const updatedBooks = books.filter((book) => book.id !== args.id);
+      books = updatedBooks;
+      console.log(books);
+      return books;
+    },
+    editBook: (_root, args) => {
+      const updatedBooks = books.map((book) =>
+        book.id === args.id ? args : book
+      );
+      books = updatedBooks;
+      console.log(books);
       return books;
     },
   },
