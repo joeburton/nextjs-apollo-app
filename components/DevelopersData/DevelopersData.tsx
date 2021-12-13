@@ -36,7 +36,7 @@ const newDeveloper = {
   skills: 'PHP, CSS',
 };
 
-const DevelopersInfo = () => {
+const DevelopersData = () => {
   const { loading, error, data } = useQuery(GET_DEVELOPERS);
 
   const [addTodo] = useMutation(ADD_DEVELOPER);
@@ -96,4 +96,4 @@ const DevelopersInfo = () => {
   );
 };
 
-export default DevelopersInfo;
+export default DevelopersData;

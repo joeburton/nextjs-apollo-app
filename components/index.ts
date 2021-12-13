@@ -1,2 +1,2 @@
 export { Developers } from './Developers';
-export { DevelopersInfo } from './DevelopersInfo';
+export { DevelopersData } from './DevelopersData';
