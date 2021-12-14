@@ -16,7 +16,7 @@ const ADD_DEVELOPER = gql`
 `;
 
 const GET_DEVELOPERS = gql`
-  query {
+  query GetDevelopers {
     developers {
       id
       name
@@ -52,14 +52,14 @@ const AddDeveloper = () => {
 
   return (
     <div className={styles.addDeveloper}>
-      <div>
+      <div className={styles.formItem}>
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder='Name'
         />
       </div>
-      <div>
+      <div className={styles.formItem}>
         <input
           value={skills}
           onChange={(e) => setSkills(e.target.value)}

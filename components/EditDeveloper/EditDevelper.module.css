@@ -1,11 +1,13 @@
-.addDeveloper {
+.editDeveloper {
   display: flex;
   flex-direction: row;
-  margin: 0 0 8px 0;
-  width: 100%;
 }
 
-.addDeveloper button {
+.editDeveloper input {
+  margin-right: 8px;
+}
+
+.editDeveloper button {
   margin-left: auto;
 }
 

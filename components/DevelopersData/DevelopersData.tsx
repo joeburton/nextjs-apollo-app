@@ -1,7 +1,7 @@
 import { useQuery, useMutation, gql } from '@apollo/client';
 
 const GET_DEVELOPERS = gql`
-  query {
+  query GetDevelopers {
     developers {
       id
       name

@@ -47,15 +47,15 @@ const resolvers = {
     },
     deleteDeveloper: (_root, args) => {
       const updatedDevelopers = developers.filter(
-        (book) => book.id !== args.id
+        (developer) => developer.id !== args.id
       );
       developers = updatedDevelopers;
       console.log(developers);
       return developers;
     },
     editDeveloper: (_root, args) => {
-      const updatedDevelopers = developers.map((book) =>
-        book.id === args.id ? args : book
+      const updatedDevelopers = developers.map((developer) =>
+        developer.id === args.id ? args : developer
       );
       developers = updatedDevelopers;
       console.log(developers);
@@ -65,7 +65,6 @@ const resolvers = {
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
-
 const startServer = server.start();
 
 export default cors(async function handler(req, res) {

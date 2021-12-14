@@ -24,12 +24,11 @@ const Home = () => {
 
   return (
     <ApolloProvider client={client}>
-      <div>
-        <h1>NextJS GraphQL Apollo App</h1>
+      <>
         <AddDeveloper />
+        <hr />
         <DeveloperList />
-        <DevelopersData />
-      </div>
+      </>
     </ApolloProvider>
   );
 };
